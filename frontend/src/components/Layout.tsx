@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
       {/* Top Navbar */}
       <nav className="navbar">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+        <div className="navbar-left">
           <Link to="/" onClick={closeMenu} className="brand-logo">
             <span className="brand-icon">🛡️</span>
             <span className="brand-name">Vouchera</span>
@@ -62,21 +62,23 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 to="/admin"
                 className={`nav-link nav-link-admin ${location.pathname === '/admin' ? 'active' : ''}`}
               >
-                ⚙️ Protocol Admin
+                ⚙️ Admin
               </Link>
             )}
           </div>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          {/* Active User Role Badge (Desktop) */}
+        <div className="navbar-right">
+          {/* Active User Role Badge (Large Desktop Only) */}
           <div className="role-badge-desktop">
             <RoleBadge />
           </div>
 
-          <WalletButton />
+          <div className="wallet-button-container">
+            <WalletButton />
+          </div>
 
-          {/* Mobile Hamburger Toggle */}
+          {/* Mobile/Medium Screen Hamburger Toggle */}
           <button
             className="mobile-menu-btn"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -87,7 +89,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
       </nav>
 
-      {/* Mobile Drawer Menu */}
+      {/* Drawer Menu for Split-Screen PC, Tablets & Mobile */}
       {mobileMenuOpen && (
         <div className="mobile-drawer">
           <div style={{ paddingBottom: '0.75rem', borderBottom: '1px solid var(--color-border)' }}>
