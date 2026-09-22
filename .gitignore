@@ -1,0 +1,32 @@
+# Environment files — never commit secrets
+.env
+.env.*
+!.env.example
+
+# Foundry artifacts
+contract/out/
+contract/cache/
+contract/broadcast/
+contract/lib/
+contract/.env
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Root node_modules (if any)
+node_modules/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Forge coverage
+lcov.info
+

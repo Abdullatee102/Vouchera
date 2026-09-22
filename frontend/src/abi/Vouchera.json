@@ -1,0 +1,2399 @@
+[
+    {
+        "type":  "constructor",
+        "inputs":  [
+                       {
+                           "name":  "initialProtocolAdmin",
+                           "type":  "address",
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "initialThreshold",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "receive",
+        "stateMutability":  "payable"
+    },
+    {
+        "type":  "function",
+        "name":  "activateProgram",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "activityScore",
+        "inputs":  [
+                       {
+                           "name":  "",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "approveBeneficiary",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "approveMerchant",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "merchantAddr",
+                           "type":  "address",
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "name",
+                           "type":  "string",
+                           "internalType":  "string"
+                       },
+                       {
+                           "name":  "categoryCode",
+                           "type":  "bytes32",
+                           "internalType":  "bytes32"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "cancelVoucher",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "closeProgram",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "createOrganization",
+        "inputs":  [
+                       {
+                           "name":  "name",
+                           "type":  "string",
+                           "internalType":  "string"
+                       },
+                       {
+                           "name":  "description",
+                           "type":  "string",
+                           "internalType":  "string"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "orgId",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "createProgram",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "name",
+                           "type":  "string",
+                           "internalType":  "string"
+                       },
+                       {
+                           "name":  "description",
+                           "type":  "string",
+                           "internalType":  "string"
+                       },
+                       {
+                           "name":  "categoryCode",
+                           "type":  "bytes32",
+                           "internalType":  "bytes32"
+                       },
+                       {
+                           "name":  "startsAt",
+                           "type":  "uint64",
+                           "internalType":  "uint64"
+                       },
+                       {
+                           "name":  "expiresAt",
+                           "type":  "uint64",
+                           "internalType":  "uint64"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "programId",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "deactivateBeneficiary",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "deactivateMerchant",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "merchantAddr",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "fundProgram",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "payable"
+    },
+    {
+        "type":  "function",
+        "name":  "getActivityScore",
+        "inputs":  [
+                       {
+                           "name":  "user",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getAllOrganizations",
+        "inputs":  [
+
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.Organization[]",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "owner",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "name",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "description",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "createdAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "active",
+                                                   "type":  "bool",
+                                                   "internalType":  "bool"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getAllRedemptions",
+        "inputs":  [
+                       {
+                           "name":  "offset",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "limit",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.Redemption[]",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "voucherId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "programId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "beneficiary",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "merchant",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "amount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "purchaseReference",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "redeemedAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getMerchant",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "merchantAddr",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple",
+                            "internalType":  "struct Vouchera.Merchant",
+                            "components":  [
+                                               {
+                                                   "name":  "account",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "name",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "categoryCode",
+                                                   "type":  "bytes32",
+                                                   "internalType":  "bytes32"
+                                               },
+                                               {
+                                                   "name":  "active",
+                                                   "type":  "bool",
+                                                   "internalType":  "bool"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getOrgBeneficiaries",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "address[]",
+                            "internalType":  "address[]"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getOrgMerchants",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.Merchant[]",
+                            "components":  [
+                                               {
+                                                   "name":  "account",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "name",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "categoryCode",
+                                                   "type":  "bytes32",
+                                                   "internalType":  "bytes32"
+                                               },
+                                               {
+                                                   "name":  "active",
+                                                   "type":  "bool",
+                                                   "internalType":  "bool"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getOrgRedemptions",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.Redemption[]",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "voucherId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "programId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "beneficiary",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "merchant",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "amount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "purchaseReference",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "redeemedAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getOrganization",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple",
+                            "internalType":  "struct Vouchera.Organization",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "owner",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "name",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "description",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "createdAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "active",
+                                                   "type":  "bool",
+                                                   "internalType":  "bool"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getOrganizationStats",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "programCount",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        },
+                        {
+                            "name":  "merchantCount",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        },
+                        {
+                            "name":  "beneficiaryCount",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        },
+                        {
+                            "name":  "redemptionCount",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getOrganizationsByOwner",
+        "inputs":  [
+                       {
+                           "name":  "owner",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.Organization[]",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "owner",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "name",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "description",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "createdAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "active",
+                                                   "type":  "bool",
+                                                   "internalType":  "bool"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getProgram",
+        "inputs":  [
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple",
+                            "internalType":  "struct Vouchera.VoucherProgram",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "name",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "description",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "categoryCode",
+                                                   "type":  "bytes32",
+                                                   "internalType":  "bytes32"
+                                               },
+                                               {
+                                                   "name":  "totalFunded",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "totalAllocated",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "totalRedeemed",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "totalRefunded",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "createdAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "startsAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "expiresAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "status",
+                                                   "type":  "uint8",
+                                                   "internalType":  "enum Vouchera.ProgramStatus"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getProgramStats",
+        "inputs":  [
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "totalFunded",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        },
+                        {
+                            "name":  "totalAllocated",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        },
+                        {
+                            "name":  "totalRedeemed",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        },
+                        {
+                            "name":  "totalRefunded",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        },
+                        {
+                            "name":  "availableFunds",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getProgramVouchers",
+        "inputs":  [
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.Voucher[]",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "programId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "beneficiary",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "allocatedAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "remainingAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "redeemedAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "categoryCode",
+                                                   "type":  "bytes32",
+                                                   "internalType":  "bytes32"
+                                               },
+                                               {
+                                                   "name":  "allowedMerchant",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "issuedAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "expiresAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "status",
+                                                   "type":  "uint8",
+                                                   "internalType":  "enum Vouchera.VoucherStatus"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getProgramsByOrganization",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.VoucherProgram[]",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "name",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "description",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "categoryCode",
+                                                   "type":  "bytes32",
+                                                   "internalType":  "bytes32"
+                                               },
+                                               {
+                                                   "name":  "totalFunded",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "totalAllocated",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "totalRedeemed",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "totalRefunded",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "createdAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "startsAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "expiresAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "status",
+                                                   "type":  "uint8",
+                                                   "internalType":  "enum Vouchera.ProgramStatus"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getRedemption",
+        "inputs":  [
+                       {
+                           "name":  "redemptionId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple",
+                            "internalType":  "struct Vouchera.Redemption",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "voucherId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "programId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "beneficiary",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "merchant",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "amount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "purchaseReference",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "redeemedAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getTotalOrganizations",
+        "inputs":  [
+
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getTotalRedemptions",
+        "inputs":  [
+
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getVoucher",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple",
+                            "internalType":  "struct Vouchera.Voucher",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "programId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "beneficiary",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "allocatedAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "remainingAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "redeemedAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "categoryCode",
+                                                   "type":  "bytes32",
+                                                   "internalType":  "bytes32"
+                                               },
+                                               {
+                                                   "name":  "allowedMerchant",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "issuedAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "expiresAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "status",
+                                                   "type":  "uint8",
+                                                   "internalType":  "enum Vouchera.VoucherStatus"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getVoucherRedemptions",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.Redemption[]",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "voucherId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "programId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "beneficiary",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "merchant",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "amount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "purchaseReference",
+                                                   "type":  "string",
+                                                   "internalType":  "string"
+                                               },
+                                               {
+                                                   "name":  "redeemedAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "getVouchersByBeneficiary",
+        "inputs":  [
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "tuple[]",
+                            "internalType":  "struct Vouchera.Voucher[]",
+                            "components":  [
+                                               {
+                                                   "name":  "id",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "organizationId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "programId",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "beneficiary",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "allocatedAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "remainingAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "redeemedAmount",
+                                                   "type":  "uint256",
+                                                   "internalType":  "uint256"
+                                               },
+                                               {
+                                                   "name":  "categoryCode",
+                                                   "type":  "bytes32",
+                                                   "internalType":  "bytes32"
+                                               },
+                                               {
+                                                   "name":  "allowedMerchant",
+                                                   "type":  "address",
+                                                   "internalType":  "address"
+                                               },
+                                               {
+                                                   "name":  "issuedAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "expiresAt",
+                                                   "type":  "uint64",
+                                                   "internalType":  "uint64"
+                                               },
+                                               {
+                                                   "name":  "status",
+                                                   "type":  "uint8",
+                                                   "internalType":  "enum Vouchera.VoucherStatus"
+                                               }
+                                           ]
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "isBeneficiaryApproved",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "bool",
+                            "internalType":  "bool"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "isEligibleToCreateOrganization",
+        "inputs":  [
+                       {
+                           "name":  "user",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "bool",
+                            "internalType":  "bool"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "issueVoucher",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "amount",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "expiresAt",
+                           "type":  "uint64",
+                           "internalType":  "uint64"
+                       },
+                       {
+                           "name":  "allowedMerchant",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "voucherId",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "organizationCreationThreshold",
+        "inputs":  [
+
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "pauseProgram",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "protocolAdmin",
+        "inputs":  [
+
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "",
+                            "type":  "address",
+                            "internalType":  "address"
+                        }
+                    ],
+        "stateMutability":  "view"
+    },
+    {
+        "type":  "function",
+        "name":  "reactivateMerchant",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "merchantAddr",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "reclaimExpiredVoucher",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "recordActivity",
+        "inputs":  [
+                       {
+                           "name":  "user",
+                           "type":  "address",
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "amount",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "redeemVoucher",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "merchantAddr",
+                           "type":  "address",
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "amount",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "purchaseReference",
+                           "type":  "string",
+                           "internalType":  "string"
+                       }
+                   ],
+        "outputs":  [
+                        {
+                            "name":  "redemptionId",
+                            "type":  "uint256",
+                            "internalType":  "uint256"
+                        }
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "setOrganizationActive",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "active",
+                           "type":  "bool",
+                           "internalType":  "bool"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "setOrganizationCreationThreshold",
+        "inputs":  [
+                       {
+                           "name":  "newThreshold",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "function",
+        "name":  "transferProtocolAdmin",
+        "inputs":  [
+                       {
+                           "name":  "newAdmin",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ],
+        "outputs":  [
+
+                    ],
+        "stateMutability":  "nonpayable"
+    },
+    {
+        "type":  "event",
+        "name":  "ActivityRecorded",
+        "inputs":  [
+                       {
+                           "name":  "user",
+                           "type":  "address",
+                           "indexed":  true,
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "amount",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "newScore",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "BeneficiaryApproved",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "indexed":  true,
+                           "internalType":  "address"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "BeneficiaryDeactivated",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "indexed":  true,
+                           "internalType":  "address"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "ExpiredVoucherReclaimed",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "reclaimedAmount",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "MerchantApproved",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "merchant",
+                           "type":  "address",
+                           "indexed":  true,
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "name",
+                           "type":  "string",
+                           "indexed":  false,
+                           "internalType":  "string"
+                       },
+                       {
+                           "name":  "categoryCode",
+                           "type":  "bytes32",
+                           "indexed":  false,
+                           "internalType":  "bytes32"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "MerchantDeactivated",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "merchant",
+                           "type":  "address",
+                           "indexed":  true,
+                           "internalType":  "address"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "OrganizationCreated",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "owner",
+                           "type":  "address",
+                           "indexed":  true,
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "name",
+                           "type":  "string",
+                           "indexed":  false,
+                           "internalType":  "string"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "OrganizationStatusChanged",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "active",
+                           "type":  "bool",
+                           "indexed":  false,
+                           "internalType":  "bool"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "ProgramCreated",
+        "inputs":  [
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "name",
+                           "type":  "string",
+                           "indexed":  false,
+                           "internalType":  "string"
+                       },
+                       {
+                           "name":  "categoryCode",
+                           "type":  "bytes32",
+                           "indexed":  false,
+                           "internalType":  "bytes32"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "ProgramFunded",
+        "inputs":  [
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "amount",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "totalFunded",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "ProgramStatusChanged",
+        "inputs":  [
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "status",
+                           "type":  "uint8",
+                           "indexed":  false,
+                           "internalType":  "enum Vouchera.ProgramStatus"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "ProtocolAdminTransferred",
+        "inputs":  [
+                       {
+                           "name":  "previousAdmin",
+                           "type":  "address",
+                           "indexed":  true,
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "newAdmin",
+                           "type":  "address",
+                           "indexed":  true,
+                           "internalType":  "address"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "ThresholdUpdated",
+        "inputs":  [
+                       {
+                           "name":  "oldThreshold",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "newThreshold",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "VoucherCancelled",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "remainingAmount",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "VoucherIssued",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "indexed":  false,
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "amount",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "categoryCode",
+                           "type":  "bytes32",
+                           "indexed":  false,
+                           "internalType":  "bytes32"
+                       },
+                       {
+                           "name":  "expiresAt",
+                           "type":  "uint64",
+                           "indexed":  false,
+                           "internalType":  "uint64"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "event",
+        "name":  "VoucherRedeemed",
+        "inputs":  [
+                       {
+                           "name":  "redemptionId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "indexed":  true,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "indexed":  false,
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "merchant",
+                           "type":  "address",
+                           "indexed":  false,
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "amount",
+                           "type":  "uint256",
+                           "indexed":  false,
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "purchaseReference",
+                           "type":  "string",
+                           "indexed":  false,
+                           "internalType":  "string"
+                       }
+                   ],
+        "anonymous":  false
+    },
+    {
+        "type":  "error",
+        "name":  "AmountIsZero",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "BeneficiaryAlreadyApproved",
+        "inputs":  [
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "BeneficiaryCannotSelfApprove",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "BeneficiaryNotApproved",
+        "inputs":  [
+                       {
+                           "name":  "beneficiary",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "EmptyDescription",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "EmptyName",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "InsufficientProgramFunds",
+        "inputs":  [
+                       {
+                           "name":  "available",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "required",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "InsufficientVoucherBalance",
+        "inputs":  [
+                       {
+                           "name":  "remaining",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "requested",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "InvalidAddress",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "InvalidExpiry",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "InvalidProgramTransition",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "MerchantAlreadyApproved",
+        "inputs":  [
+                       {
+                           "name":  "merchant",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "MerchantCannotSelfApprove",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "MerchantCategoryMismatch",
+        "inputs":  [
+                       {
+                           "name":  "expected",
+                           "type":  "bytes32",
+                           "internalType":  "bytes32"
+                       },
+                       {
+                           "name":  "got",
+                           "type":  "bytes32",
+                           "internalType":  "bytes32"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "MerchantNotActive",
+        "inputs":  [
+                       {
+                           "name":  "merchant",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "MerchantNotApproved",
+        "inputs":  [
+                       {
+                           "name":  "merchant",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "NativeTrasferFailed",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "NotBeneficiary",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "NotEligibleToCreateOrganization",
+        "inputs":  [
+                       {
+                           "name":  "user",
+                           "type":  "address",
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "score",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       },
+                       {
+                           "name":  "threshold",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "NotOrganizationOwner",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "NotProtocolAdmin",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "OrganizationInactive",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "OrganizationNotFound",
+        "inputs":  [
+                       {
+                           "name":  "orgId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "ProgramAlreadyClosed",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "ProgramExpired",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "ProgramNotActive",
+        "inputs":  [
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "ProgramNotFound",
+        "inputs":  [
+                       {
+                           "name":  "programId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "ReentrancyGuardReentrantCall",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "VoucherAlreadyCancelled",
+        "inputs":  [
+
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "VoucherExpired",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "VoucherFullyRedeemed",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "VoucherIsCancelled",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "VoucherNotActive",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "VoucherNotExpired",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "VoucherNotFound",
+        "inputs":  [
+                       {
+                           "name":  "voucherId",
+                           "type":  "uint256",
+                           "internalType":  "uint256"
+                       }
+                   ]
+    },
+    {
+        "type":  "error",
+        "name":  "WrongMerchant",
+        "inputs":  [
+                       {
+                           "name":  "expected",
+                           "type":  "address",
+                           "internalType":  "address"
+                       },
+                       {
+                           "name":  "provided",
+                           "type":  "address",
+                           "internalType":  "address"
+                       }
+                   ]
+    }
+]
