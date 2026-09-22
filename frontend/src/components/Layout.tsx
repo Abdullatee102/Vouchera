@@ -4,7 +4,6 @@ import { useAccount, useChainId } from 'wagmi';
 import { useProtocolAdmin } from '../hooks/useVouchera';
 import WalletButton from './WalletButton';
 import RoleBadge from './RoleBadge';
-import OnboardingModal from './OnboardingModal';
 import { VOUCHERA_CONTRACT_ADDRESS, BOHR_CHAIN_ID, BOHR_EXPLORER } from '../config/contracts';
 import { formatAddress } from '../utils/formatting';
 
@@ -14,7 +13,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const { data: protocolAdmin } = useProtocolAdmin();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [tourOpen, setTourOpen] = useState(false);
 
   const isAdmin = address && protocolAdmin && address.toLowerCase() === protocolAdmin.toLowerCase();
   const isCorrectNetwork = !isConnected || chainId === BOHR_CHAIN_ID;
@@ -33,9 +31,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="app-container">
-      {/* Interactive First-Time Onboarding Modal */}
-      <OnboardingModal forceOpen={tourOpen} onClose={() => setTourOpen(false)} />
-
       {/* Network Warning Banner */}
       {!isCorrectNetwork && (
         <div className="network-alert">
@@ -74,19 +69,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-          {/* Active User Role Badge */}
-          <RoleBadge />
-
-          {/* Tour / Help Trigger */}
-          <button
-            className="btn btn-secondary"
-            onClick={() => setTourOpen(true)}
-            style={{ padding: '0.35rem 0.65rem', fontSize: '0.785rem', display: 'inline-flex', alignItems: 'center', gap: '0.25rem' }}
-            title="Open Interactive Guide"
-          >
-            <span>💡</span>
-            <span className="hide-mobile">Tour</span>
-          </button>
+          {/* Active User Role Badge (Desktop) */}
+          <div className="role-badge-desktop">
+            <RoleBadge />
+          </div>
 
           <WalletButton />
 
@@ -104,7 +90,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
         <div className="mobile-drawer">
-          <div style={{ paddingBottom: '0.5rem', borderBottom: '1px solid var(--color-border)' }}>
+          <div style={{ paddingBottom: '0.75rem', borderBottom: '1px solid var(--color-border)' }}>
             <RoleBadge />
           </div>
           {navLinks.map(link => (
@@ -126,16 +112,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               ⚙️ Protocol Admin
             </Link>
           )}
-          <button
-            className="btn btn-secondary"
-            onClick={() => {
-              closeMenu();
-              setTourOpen(true);
-            }}
-            style={{ marginTop: '0.5rem', width: '100%', textAlign: 'center' }}
-          >
-            📖 Open Interactive Tour
-          </button>
         </div>
       )}
 

@@ -11,17 +11,9 @@ export default function Home() {
   const { data: orgs } = useAllOrganizations();
   const { data: redemptions } = useAllRedemptions(0n, 100n);
 
-  const flowSteps = [
-    { num: '1', title: 'Earn Eligibility', desc: 'Participate in the protocol to reach the on-chain activity score threshold.', icon: '🎯', link: '/how-it-works#eligibility' },
-    { num: '2', title: 'Create Organization', desc: 'Eligible users establish an independent organization and become its sovereign owner.', icon: '🏛️', link: '/organizations' },
-    { num: '3', title: 'Fund Subsidy Pool', desc: 'Deposit native BOT into restricted subsidy programs (Food, Healthcare, Education).', icon: '💰', link: '/programs' },
-    { num: '4', title: 'Issue Vouchers', desc: 'Allocate non-transferable, restricted digital vouchers to approved beneficiaries.', icon: '🎫', link: '/my-vouchers' },
-    { num: '5', title: 'Merchant Settlement', desc: 'Beneficiary redeems voucher; approved merchant receives actual BOT on-chain.', icon: '🏪', link: '/merchants' },
-  ];
-
   return (
     <div>
-      {/* Dynamic Role & Permission Matrix */}
+      {/* Dynamic Role & Action Matrix */}
       <WhatCanIDoNow />
 
       {/* Hero Section */}
@@ -35,110 +27,75 @@ export default function Home() {
           A decentralized Web3 protocol enabling organizations to fund, restrict, and distribute native BOT-backed subsidy vouchers to verified beneficiaries with automated merchant settlement.
         </p>
 
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-          <Link to="/how-it-works" className="btn btn-primary">
-            📖 How Vouchera Works
-          </Link>
-          <Link to="/organizations" className="btn btn-secondary">
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+          <Link to="/organizations" className="btn btn-primary">
             Explore Organizations
+          </Link>
+          <Link to="/programs" className="btn btn-secondary">
+            Subsidy Programs
           </Link>
           <Link to="/my-vouchers" className="btn btn-secondary">
             My Vouchers
           </Link>
-          <Link to="/activity" className="btn btn-secondary">
-            Live Network Activity
+          <Link to="/how-it-works" className="btn btn-secondary">
+            📖 Protocol Guide
           </Link>
         </div>
       </section>
 
       {/* Protocol Metrics */}
-      <section style={{ marginBottom: '3rem' }}>
-        <div className="grid grid-cols-3" style={{ gap: '1.5rem' }}>
+      <section style={{ marginBottom: '2.5rem' }}>
+        <div className="grid grid-cols-3" style={{ gap: '1.25rem' }}>
           <div className="card" style={{ textAlign: 'center', borderTop: '3px solid var(--color-primary)' }}>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.875rem', margin: '0 0 0.5rem 0' }}>
+            <p style={{ color: 'var(--color-muted)', fontSize: '0.825rem', margin: '0 0 0.5rem 0' }}>
               ACTIVE ORGANIZATIONS
               <Tooltip content="Total verified organizations created on-chain by eligible owners." />
             </p>
-            <p style={{ fontSize: '2.5rem', fontWeight: 900, margin: 0, color: 'var(--color-primary)' }}>
+            <p style={{ fontSize: '2.25rem', fontWeight: 900, margin: 0, color: 'var(--color-primary)' }}>
               {orgs?.length || 0}
             </p>
           </div>
 
           <div className="card" style={{ textAlign: 'center', borderTop: '3px solid var(--color-secondary)' }}>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.875rem', margin: '0 0 0.5rem 0' }}>
+            <p style={{ color: 'var(--color-muted)', fontSize: '0.825rem', margin: '0 0 0.5rem 0' }}>
               ON-CHAIN REDEMPTIONS
               <Tooltip content="Total completed voucher redemptions with instant BOT merchant payouts." />
             </p>
-            <p style={{ fontSize: '2.5rem', fontWeight: 900, margin: 0, color: '#a855f7' }}>
+            <p style={{ fontSize: '2.25rem', fontWeight: 900, margin: 0, color: '#a855f7' }}>
               {redemptions?.length || 0}
             </p>
           </div>
 
           <div className="card" style={{ textAlign: 'center', borderTop: '3px solid var(--color-success)' }}>
-            <p style={{ color: 'var(--color-muted)', fontSize: '0.875rem', margin: '0 0 0.5rem 0' }}>
+            <p style={{ color: 'var(--color-muted)', fontSize: '0.825rem', margin: '0 0 0.5rem 0' }}>
               CREATION THRESHOLD
               <Tooltip content="Required activity score before a wallet can create an organization." />
             </p>
-            <p style={{ fontSize: '2.5rem', fontWeight: 900, margin: 0, color: 'var(--color-success)' }}>
+            <p style={{ fontSize: '2.25rem', fontWeight: 900, margin: 0, color: 'var(--color-success)' }}>
               {threshold !== undefined ? `${threshold.toString()} pts` : '10 pts'}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Interactive 5-Step Protocol Journey */}
-      <section style={{ marginBottom: '3rem' }}>
-        <h2 className="section-title" style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
-          The Vouchera Subsidy Journey
-        </h2>
-        <p style={{ textAlign: 'center', color: 'var(--color-muted)', marginBottom: '2.5rem' }}>
-          Click on any step below to explore its role and contract interactions
-        </p>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-3" style={{ gap: '1.25rem' }}>
-          {flowSteps.map(step => (
-            <Link
-              key={step.num}
-              to={step.link}
-              className="card"
-              style={{ position: 'relative', display: 'block', textDecoration: 'none', color: 'inherit', transition: 'all 0.2s ease' }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.75rem' }}>
-                <span style={{ fontSize: '1.75rem' }}>{step.icon}</span>
-                <span style={{ width: '28px', height: '28px', borderRadius: '50%', background: 'rgba(6, 182, 212, 0.2)', color: 'var(--color-primary)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '0.85rem' }}>
-                  {step.num}
-                </span>
-              </div>
-              <h3 style={{ margin: '0 0 0.5rem 0', fontSize: '1.15rem', color: 'var(--color-text)' }}>{step.title}</h3>
-              <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.875rem', lineHeight: '1.5' }}>
-                {step.desc}
-              </p>
-              <div style={{ marginTop: '0.75rem', fontSize: '0.8rem', color: 'var(--color-primary)', fontWeight: 'bold' }}>
-                Explore Step &rarr;
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
       {/* Subsidy Voucher Categories */}
-      <section style={{ marginBottom: '3rem' }}>
-        <h2 className="section-title" style={{ textAlign: 'center', marginBottom: '0.5rem' }}>
+      <section style={{ marginBottom: '2.5rem' }}>
+        <h2 className="section-title" style={{ textAlign: 'center', marginBottom: '0.35rem' }}>
           Supported Voucher Categories
         </h2>
-        <p style={{ textAlign: 'center', color: 'var(--color-muted)', marginBottom: '2rem' }}>
+        <p style={{ textAlign: 'center', color: 'var(--color-muted)', marginBottom: '1.5rem', fontSize: '0.9rem' }}>
           Vouchers enforce strict on-chain category restrictions — usable only at approved merchants.
         </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3" style={{ gap: '1.25rem' }}>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3" style={{ gap: '1rem' }}>
           {CATEGORIES.map(cat => (
-            <div key={cat.name} className="card" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-              <div style={{ fontSize: '2.5rem', width: '60px', height: '60px', background: `${cat.color}15`, border: `1px solid ${cat.color}35`, borderRadius: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div key={cat.name} className="card" style={{ display: 'flex', alignItems: 'center', gap: '1rem', padding: '1rem 1.25rem' }}>
+              <div style={{ fontSize: '2rem', width: '50px', height: '50px', background: `${cat.color}15`, border: `1px solid ${cat.color}35`, borderRadius: '0.75rem', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 {cat.emoji}
               </div>
               <div>
-                <h4 style={{ margin: '0 0 0.25rem 0', color: cat.color }}>{cat.name}</h4>
-                <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.8rem' }}>
+                <h4 style={{ margin: '0 0 0.2rem 0', color: cat.color, fontSize: '1rem' }}>{cat.name}</h4>
+                <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.785rem' }}>
                   Restricted Subsidy Asset
                 </p>
               </div>
@@ -148,11 +105,11 @@ export default function Home() {
       </section>
 
       {/* Transparency & Disclaimer Box */}
-      <section className="card" style={{ textAlign: 'center', borderColor: 'rgba(6, 182, 212, 0.25)' }}>
-        <p style={{ margin: '0 0 0.5rem 0', fontWeight: 'bold', color: 'var(--color-primary)' }}>
+      <section className="card" style={{ textAlign: 'center', borderColor: 'rgba(6, 182, 212, 0.25)', padding: '1.25rem' }}>
+        <p style={{ margin: '0 0 0.35rem 0', fontWeight: 'bold', color: 'var(--color-primary)', fontSize: '0.95rem' }}>
           🔒 Non-Transferable Digital Subsidies
         </p>
-        <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.875rem', maxWidth: '800px', marginInline: 'auto', lineHeight: '1.5' }}>
+        <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem', maxWidth: '800px', marginInline: 'auto', lineHeight: '1.5' }}>
           Vouchera vouchers are <strong>restricted claims against funded subsidy value</strong> held by smart contract <a href={`${BOHR_EXPLORER}address/${VOUCHERA_CONTRACT_ADDRESS}`} target="_blank" rel="noreferrer" style={{ color: 'var(--color-primary)' }}>{formatAddress(VOUCHERA_CONTRACT_ADDRESS)}</a>. They are NOT speculative tokens and cannot be freely transferred or traded between wallets.
         </p>
       </section>

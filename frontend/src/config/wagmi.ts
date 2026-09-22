@@ -57,7 +57,7 @@ createAppKit({
   metadata: {
     name: 'Vouchera',
     description: 'Controlled digital subsidy/voucher system on Bohr Testnet',
-    url: import.meta.env.VITE_APP_URL || 'https://vouchera.app',
+    url: import.meta.env.VITE_APP_URL || 'https://vouchera-three.vercel.app',
     icons: ['/favicon.ico'],
   },
   themeMode: 'dark',
