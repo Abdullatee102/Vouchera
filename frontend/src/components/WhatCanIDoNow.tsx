@@ -302,9 +302,12 @@ export default function WhatCanIDoNow() {
   }
 
   // Render Connected: Below Eligibility Threshold (New / Standard Participant)
-  const currentScore = score !== undefined ? Number(score) : 0;
-  const currentThreshold = threshold !== undefined ? Number(threshold) : 10;
-  const progressPercent = Math.min(100, Math.round((currentScore / (currentThreshold || 1)) * 100));
+  const currentScore = score !== undefined ? score : 0n;
+  const currentThreshold = threshold !== undefined ? threshold : 10n;
+  const pointsNeeded = currentThreshold > currentScore ? currentThreshold - currentScore : 0n;
+  const progressPercent = currentThreshold > 0n
+    ? Math.min(100, Number((currentScore * 100n) / currentThreshold))
+    : 0;
 
   return (
     <div className="card" style={{ marginBottom: '2rem', border: '1px solid var(--color-border)', background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)' }}>
@@ -314,11 +317,13 @@ export default function WhatCanIDoNow() {
             🧭 What Can I Do Right Now?
           </h3>
           <p style={{ margin: '0.25rem 0 0 0', color: 'var(--color-muted)', fontSize: '0.875rem' }}>
-            Wallet Status: <strong>Connected Participant</strong> ({currentScore} / {currentThreshold} points)
+            Wallet Status: <strong>Connected Participant</strong> ({currentScore.toString()} / {currentThreshold.toString()} points)
           </p>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <span className="badge badge-warning">Eligibility Score: {currentScore} / {currentThreshold}</span>
+          <span className="badge badge-warning">
+            {pointsNeeded > 0n ? `Needs ${pointsNeeded.toString()} More Points` : 'Threshold Reached'}
+          </span>
         </div>
       </div>
 
@@ -326,7 +331,7 @@ export default function WhatCanIDoNow() {
       <div style={{ marginBottom: '1.25rem' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.785rem', color: 'var(--color-muted)', marginBottom: '0.25rem' }}>
           <span>Organization Creation Gate</span>
-          <span>{progressPercent}% completed</span>
+          <span>{progressPercent}% completed ({currentScore.toString()} / {currentThreshold.toString()} pts)</span>
         </div>
         <div className="progress-bar">
           <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
@@ -339,10 +344,10 @@ export default function WhatCanIDoNow() {
             ✓ Currently Available to You:
           </p>
           <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.825rem', color: 'var(--color-text)', lineHeight: '1.6' }}>
-            <li>Browse organizations, programs & merchants</li>
-            <li>Inspect on-chain redemptions and contract state</li>
-            <li>Receive vouchers if an organization approves you</li>
-            <li>Learn how the on-chain activity gate works</li>
+            <li>Browse verified organizations & subsidy programs</li>
+            <li>Inspect on-chain redemptions and contract settlements</li>
+            <li>Receive vouchers if an organization approves your wallet</li>
+            <li>Check your real-time activity score on Bohr Testnet</li>
           </ul>
         </div>
 
@@ -352,11 +357,11 @@ export default function WhatCanIDoNow() {
           </p>
           <ul style={{ margin: 0, paddingLeft: '1.2rem', fontSize: '0.825rem', color: 'var(--color-muted)', lineHeight: '1.6' }}>
             <li>
-              <strong>Create Organization</strong> — Requires {currentThreshold} activity points.
-              <Tooltip content="Prevents spam organization creation. Protocol Admin records activity for verified participants." />
+              <strong>Create Organization</strong> — You need {pointsNeeded.toString()} more activity points to become eligible.
+              <Tooltip content="Enforces on-chain spam prevention and verified subsidy governance." />
             </li>
             <li>
-              <strong>Issue Vouchers</strong> — Requires organization ownership.
+              <strong>Issue Vouchers</strong> — Requires creating and owning an organization.
             </li>
           </ul>
         </div>
@@ -364,9 +369,11 @@ export default function WhatCanIDoNow() {
 
       <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
         <div>
-          <strong style={{ color: 'var(--color-text)', fontSize: '0.9rem' }}>How to unlock Organization Creation:</strong>
-          <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.825rem' }}>
-            Activity points are recorded on-chain by the Protocol Admin for verified protocol participants.
+          <strong style={{ color: 'var(--color-text)', fontSize: '0.9rem' }}>
+            You need {pointsNeeded.toString()} more activity points to become eligible.
+          </strong>
+          <p style={{ margin: '0.15rem 0 0 0', color: 'var(--color-muted)', fontSize: '0.825rem' }}>
+            Activity points are recorded on-chain by the Protocol Admin for verified protocol participants and partner institutions.
           </p>
         </div>
         <div style={{ display: 'flex', gap: '0.5rem' }}>

@@ -15,9 +15,10 @@ export default function Organizations() {
   const { data: score } = useActivityScore(address);
   const { data: threshold } = useOrganizationThreshold();
 
-  const currentScore = score !== undefined ? Number(score) : 0;
-  const currentThreshold = threshold !== undefined ? Number(threshold) : 10;
-  const isEligible = score !== undefined && threshold !== undefined && score >= threshold;
+  const currentScore = score !== undefined ? score : 0n;
+  const currentThreshold = threshold !== undefined ? threshold : 10n;
+  const isEligible = currentScore >= currentThreshold && currentThreshold > 0n;
+  const pointsNeeded = currentThreshold > currentScore ? currentThreshold - currentScore : 0n;
 
   const [showCreate, setShowCreate] = useState(false);
   const [name, setName] = useState('');
@@ -71,26 +72,26 @@ export default function Organizations() {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.25rem' }}>
                 <strong style={{ fontSize: '1.05rem', color: isEligible ? 'var(--color-success)' : 'var(--color-warning)' }}>
-                  {isEligible ? '✓ You Are Eligible to Create an Organization' : '⏳ Organization Creation Requirement'}
+                  {isEligible ? '✓ You Are Eligible to Create an Organization' : `⏳ You need ${pointsNeeded.toString()} more activity points to become eligible.`}
                 </strong>
                 <Tooltip content="Vouchera requires an on-chain activity score to prevent spam and ensure verified subsidy distribution." />
               </div>
               <p style={{ margin: '0 0 0.75rem 0', color: 'var(--color-muted)', fontSize: '0.85rem' }}>
-                Your Activity Score: <strong>{currentScore}</strong> / {currentThreshold} points required.
+                Your Activity Score: <strong>{currentScore.toString()}</strong> / {currentThreshold.toString()} points required.
               </p>
             </div>
 
             {isEligible ? (
-              <span className="badge badge-success">✓ Threshold Reached</span>
+              <span className="badge badge-success">✓ Eligible</span>
             ) : (
-              <span className="badge badge-warning">Needs {currentThreshold - currentScore} More Points</span>
+              <span className="badge badge-warning">Needs {pointsNeeded.toString()} More Points</span>
             )}
           </div>
 
           {!isEligible && (
             <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '0.75rem', marginTop: '0.5rem', fontSize: '0.825rem', color: 'var(--color-muted)' }}>
               <p style={{ margin: '0 0 0.5rem 0' }}>
-                <strong>Why does this requirement exist?</strong> Vouchera enforces an on-chain activity gate so that only verified entities manage public subsidy funds.
+                <strong>Why does this requirement exist?</strong> Vouchera enforces an on-chain activity gate (<code>isEligibleToCreateOrganization</code>) so that verified entities manage public subsidy funds.
               </p>
               <Link to="/how-it-works#eligibility" style={{ color: 'var(--color-primary)', fontWeight: 'bold' }}>
                 Learn how activity points are recorded &rarr;

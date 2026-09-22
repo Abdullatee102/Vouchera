@@ -17,6 +17,8 @@ export default function OrgSetupProgress({
   const hasPrograms = programs.length > 0;
   const fundedProgram = programs.find(p => p.totalFunded > 0n);
   const isFunded = !!fundedProgram;
+  const activeProgram = programs.find(p => p.status === 1);
+  const isActive = !!activeProgram;
   const hasBeneficiaries = beneficiaryCount > 0;
   const hasMerchants = merchants.filter(m => m.active).length > 0;
   const hasAllocated = programs.some(p => p.totalAllocated > 0n);
@@ -33,7 +35,7 @@ export default function OrgSetupProgress({
     {
       id: 'program',
       label: '2. Create Program',
-      desc: hasPrograms ? `${programs.length} active program(s)` : 'Define a subsidy program (e.g. Food, Healthcare).',
+      desc: hasPrograms ? `${programs.length} program(s) created` : 'Define a subsidy program (e.g. Food, Healthcare).',
       isDone: hasPrograms,
       tab: 'programs',
       actionLabel: hasPrograms ? 'Manage Programs' : '+ Create Program',
@@ -47,20 +49,20 @@ export default function OrgSetupProgress({
       actionLabel: isFunded ? 'View Pool' : 'Deposit BOT',
     },
     {
-      id: 'beneficiaries',
-      label: '4. Beneficiaries',
-      desc: hasBeneficiaries ? `${beneficiaryCount} approved recipient(s)` : 'Approve recipient wallets for your subsidy.',
-      isDone: hasBeneficiaries,
-      tab: 'beneficiaries',
-      actionLabel: hasBeneficiaries ? 'Manage List' : '+ Approve Beneficiary',
+      id: 'activate',
+      label: '4. Activate Program',
+      desc: isActive ? 'Program is active on-chain.' : (isFunded ? 'Funded & ready to activate.' : 'Requires funding before activation.'),
+      isDone: isActive,
+      tab: 'programs',
+      actionLabel: isActive ? 'Program Active' : (isFunded ? '⚡ Activate Program' : 'Fund & Activate'),
     },
     {
-      id: 'merchants',
-      label: '5. Merchants',
-      desc: hasMerchants ? `${merchants.length} verified merchant(s)` : 'Approve merchant wallets to accept redemptions.',
-      isDone: hasMerchants,
-      tab: 'merchants',
-      actionLabel: hasMerchants ? 'Manage Merchants' : '+ Approve Merchant',
+      id: 'parties',
+      label: '5. Allowlist Parties',
+      desc: hasBeneficiaries && hasMerchants ? `${beneficiaryCount} ben, ${merchants.length} merch` : 'Approve recipients & merchants.',
+      isDone: hasBeneficiaries && hasMerchants,
+      tab: 'beneficiaries',
+      actionLabel: hasBeneficiaries ? 'Manage Merchants' : '+ Approve Beneficiary',
     },
     {
       id: 'vouchers',

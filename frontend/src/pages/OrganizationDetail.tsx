@@ -62,6 +62,7 @@ export default function OrganizationDetail() {
   const { orgId } = useParams<{ orgId: string }>();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeTab = searchParams.get('tab') || 'programs';
+  const paramProgId = searchParams.get('programId') || searchParams.get('activateId') || '';
 
   const id = orgId ? BigInt(orgId) : undefined;
   const { address } = useAccount();
@@ -87,7 +88,7 @@ export default function OrganizationDetail() {
   const [progDays, setProgDays] = useState('90');
 
   // Fund Form State
-  const [fundProgId, setFundProgId] = useState('');
+  const [fundProgId, setFundProgId] = useState(paramProgId);
   const [fundAmount, setFundAmount] = useState('');
 
   // Beneficiary Form State
@@ -99,7 +100,7 @@ export default function OrganizationDetail() {
   const [merchCat, setMerchCat] = useState(CATEGORIES[0].code);
 
   // Issue Voucher Form State
-  const [issueProg, setIssueProg] = useState('');
+  const [issueProg, setIssueProg] = useState(paramProgId);
   const [issueBen, setIssueBen] = useState<string>('');
   const [issueAmount, setIssueAmount] = useState('');
   const [issueDays, setIssueDays] = useState('30');
@@ -264,10 +265,98 @@ export default function OrganizationDetail() {
             </div>
 
             {programs && programs.length > 0 ? (
-              <div className="grid md:grid-cols-2" style={{ gap: '1rem' }}>
-                {programs.map(p => (
-                  <ProgramCard key={p.id.toString()} program={p} />
-                ))}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div className="grid md:grid-cols-2" style={{ gap: '1rem' }}>
+                  {programs.map(p => (
+                    <div key={p.id.toString()} style={{ display: 'flex', flexDirection: 'column' }}>
+                      <ProgramCard program={p} />
+                      {isOwner && (
+                        <div style={{ padding: '0.65rem', background: 'rgba(15, 23, 42, 0.95)', border: '1px solid var(--color-border)', borderTop: 'none', borderBottomLeftRadius: '0.75rem', borderBottomRightRadius: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
+                          <span style={{ fontSize: '0.75rem', color: 'var(--color-muted)' }}>
+                            Owner Controls:
+                          </span>
+                          <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap' }}>
+                            {p.status === 0 && (
+                              <>
+                                <button
+                                  className="btn btn-secondary"
+                                  onClick={() => {
+                                    setFundProgId(p.id.toString());
+                                    setTab('funding');
+                                  }}
+                                  style={{ padding: '0.3rem 0.65rem', fontSize: '0.75rem' }}
+                                >
+                                  💰 Fund
+                                </button>
+                                <button
+                                  className="btn btn-primary"
+                                  disabled={isPending || isConfirming}
+                                  onClick={() => {
+                                    writeContract({
+                                      address: VOUCHERA_CONTRACT_ADDRESS,
+                                      abi: VOUCHERA_ABI,
+                                      functionName: 'activateProgram',
+                                      args: [id!, p.id],
+                                    });
+                                  }}
+                                  style={{ padding: '0.3rem 0.65rem', fontSize: '0.75rem' }}
+                                >
+                                  ⚡ Activate
+                                </button>
+                              </>
+                            )}
+                            {p.status === 1 && (
+                              <>
+                                <button
+                                  className="btn btn-primary"
+                                  onClick={() => {
+                                    setIssueProg(p.id.toString());
+                                    setTab('beneficiaries');
+                                  }}
+                                  style={{ padding: '0.3rem 0.65rem', fontSize: '0.75rem' }}
+                                >
+                                  🎫 Issue Voucher
+                                </button>
+                                <button
+                                  className="btn btn-secondary"
+                                  disabled={isPending || isConfirming}
+                                  onClick={() => {
+                                    writeContract({
+                                      address: VOUCHERA_CONTRACT_ADDRESS,
+                                      abi: VOUCHERA_ABI,
+                                      functionName: 'pauseProgram',
+                                      args: [id!, p.id],
+                                    });
+                                  }}
+                                  style={{ padding: '0.3rem 0.65rem', fontSize: '0.75rem' }}
+                                >
+                                  ⏸️ Pause
+                                </button>
+                              </>
+                            )}
+                            {p.status === 2 && (
+                              <button
+                                className="btn btn-primary"
+                                disabled={isPending || isConfirming}
+                                onClick={() => {
+                                  writeContract({
+                                    address: VOUCHERA_CONTRACT_ADDRESS,
+                                    abi: VOUCHERA_ABI,
+                                    functionName: 'activateProgram',
+                                    args: [id!, p.id],
+                                  });
+                                }}
+                                style={{ padding: '0.3rem 0.65rem', fontSize: '0.75rem' }}
+                              >
+                                ▶️ Reactivate
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             ) : (
               <div className="card" style={{ textAlign: 'center', padding: '3rem 1rem' }}>

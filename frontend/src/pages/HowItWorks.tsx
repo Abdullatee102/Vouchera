@@ -119,18 +119,18 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      {/* Section 3: How Money Moves */}
+      {/* Section 3: How Money & Subsidies Move */}
       <section className="card" style={{ marginBottom: '2rem' }}>
         <h2 className="section-title" style={{ color: 'var(--color-primary)', fontSize: '1.5rem' }}>
-          3. How Money & Subsidies Move (The 5 Steps)
+          3. How Money & Subsidies Move (The 5 Lifecycle Steps)
         </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '1rem' }}>
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '0.85rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '0.5rem' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--color-primary)', color: '#04101e', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>1</div>
             <div>
-              <h4 style={{ margin: '0 0 0.25rem 0' }}>Deposit Native BOT into Program Pool</h4>
+              <h4 style={{ margin: '0 0 0.25rem 0' }}>1. Create Subsidy Program (Status: Draft)</h4>
               <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>
-                The organization owner calls <code>fundProgram</code> and deposits native BOT tokens into the smart contract. This forms the verifiable liquidity backing all issued vouchers.
+                The organization owner calls <code>createProgram</code> to establish a category-locked program container (e.g. Food, Healthcare, Education).
               </p>
             </div>
           </div>
@@ -138,9 +138,9 @@ export default function HowItWorks() {
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '0.85rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '0.5rem' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--color-primary)', color: '#04101e', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>2</div>
             <div>
-              <h4 style={{ margin: '0 0 0.25rem 0' }}>Issue Restricted Voucher to Beneficiary</h4>
+              <h4 style={{ margin: '0 0 0.25rem 0' }}>2. Deposit Native BOT into Program Pool</h4>
               <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>
-                The owner issues a voucher to an approved beneficiary wallet. The contract ensures <code>totalAllocated &le; totalFunded</code> so no unfunded vouchers can ever be created.
+                The owner calls <code>fundProgram</code> and deposits native BOT tokens into the smart contract. This forms the verifiable liquidity backing all issued vouchers.
               </p>
             </div>
           </div>
@@ -148,19 +148,29 @@ export default function HowItWorks() {
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '0.85rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '0.5rem' }}>
             <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--color-primary)', color: '#04101e', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>3</div>
             <div>
-              <h4 style={{ margin: '0 0 0.25rem 0' }}>Beneficiary Authorizes Redemption</h4>
+              <h4 style={{ margin: '0 0 0.25rem 0' }}>3. Activate Program (Status: Active)</h4>
               <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>
-                The beneficiary presents their voucher at an approved merchant and calls <code>redeemVoucher</code> with the purchase amount and reference note.
+                The owner calls <code>activateProgram</code> on the funded program. Once activated, the program is live and vouchers can be allocated to approved beneficiaries.
+              </p>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '0.85rem', background: 'rgba(255, 255, 255, 0.03)', borderRadius: '0.5rem' }}>
+            <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--color-primary)', color: '#04101e', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>4</div>
+            <div>
+              <h4 style={{ margin: '0 0 0.25rem 0' }}>4. Issue Restricted Voucher to Beneficiary</h4>
+              <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.85rem' }}>
+                The owner issues a voucher to an approved beneficiary wallet. The contract ensures <code>totalAllocated &le; totalFunded</code> so no unfunded vouchers can ever be created.
               </p>
             </div>
           </div>
 
           <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', padding: '0.85rem', background: 'rgba(34, 197, 94, 0.1)', border: '1px solid rgba(34, 197, 94, 0.3)', borderRadius: '0.5rem' }}>
-            <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--color-success)', color: '#04101e', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>4</div>
+            <div style={{ width: '32px', height: '32px', borderRadius: '50%', background: 'var(--color-success)', color: '#04101e', fontWeight: 'bold', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>5</div>
             <div>
-              <h4 style={{ margin: '0 0 0.25rem 0', color: 'var(--color-success)' }}>On-Chain Verification & Direct BOT Settlement</h4>
+              <h4 style={{ margin: '0 0 0.25rem 0', color: 'var(--color-success)' }}>5. Beneficiary Redemption & Direct BOT Settlement</h4>
               <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.85rem' }}>
-                The contract verifies category code, active merchant status, and remaining balance. It instantly transfers actual native BOT to the merchant wallet and records the redemption.
+                The beneficiary presents their voucher at an approved merchant and calls <code>redeemVoucher</code>. The contract atomically transfers actual native BOT from the program pool to the merchant.
               </p>
             </div>
           </div>
