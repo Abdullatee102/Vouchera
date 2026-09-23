@@ -177,20 +177,35 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      {/* Section 4: Eligibility Mechanism */}
+      {/* Section 4: Eligibility & Welcome Points Mechanism */}
       <section id="eligibility" className="card" style={{ marginBottom: '2rem', border: '1px solid var(--color-warning)' }}>
         <h2 className="section-title" style={{ color: 'var(--color-warning)', fontSize: '1.5rem' }}>
-          4. The On-Chain Eligibility Gate Explained
+          4. On-Chain Eligibility Gate & Welcome Rewards
         </h2>
         <p style={{ lineHeight: '1.6', color: 'var(--color-text)', fontSize: '0.95rem' }}>
           To prevent spam organizations and maintain subsidy integrity, Vouchera requires wallets to achieve an on-chain <strong>Activity Score threshold</strong> (currently <strong>{currentThreshold} points</strong>) before creating an organization.
         </p>
 
-        <div style={{ padding: '1rem', background: 'rgba(245, 158, 11, 0.08)', borderRadius: '0.5rem', marginTop: '1rem', border: '1px solid rgba(245, 158, 11, 0.2)' }}>
-          <h4 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-warning)' }}>How is Activity Recorded?</h4>
-          <p style={{ margin: 0, color: 'var(--color-text)', fontSize: '0.875rem', lineHeight: '1.5' }}>
-            Qualifying activity points are recorded on-chain by the Protocol Admin (<code>{protocolAdmin ? formatAddress(protocolAdmin) : 'Deployer'}</code>) for verified community participants and partner institutions.
-          </p>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1rem', marginTop: '1rem' }}>
+          <div style={{ padding: '1rem', background: 'rgba(124, 58, 237, 0.08)', borderRadius: '0.5rem', border: '1px solid rgba(124, 58, 237, 0.25)' }}>
+            <h4 style={{ margin: '0 0 0.5rem 0', color: '#c084fc' }}>🎁 Free 2 Welcome Activity Points</h4>
+            <p style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text)', fontSize: '0.85rem', lineHeight: '1.5' }}>
+              Every new participant can request <strong>2 fixed starter points</strong> to begin their journey towards organization creation eligibility.
+            </p>
+            <span style={{ fontSize: '0.785rem', color: 'var(--color-muted)' }}>
+              ⚡ Awarded on-chain via <code>recordActivity(user, 2)</code> by Protocol Admin upon verification.
+            </span>
+          </div>
+
+          <div style={{ padding: '1rem', background: 'rgba(245, 158, 11, 0.08)', borderRadius: '0.5rem', border: '1px solid rgba(245, 158, 11, 0.25)' }}>
+            <h4 style={{ margin: '0 0 0.5rem 0', color: 'var(--color-warning)' }}>🏅 General Protocol Activity Awards</h4>
+            <p style={{ margin: '0 0 0.5rem 0', color: 'var(--color-text)', fontSize: '0.85rem', lineHeight: '1.5' }}>
+              Additional activity points (e.g. 5, 10, 25, 100) are recorded by the Protocol Admin (<code>{protocolAdmin ? formatAddress(protocolAdmin) : 'Deployer'}</code>) for verified contributors and partner institutions.
+            </p>
+            <span style={{ fontSize: '0.785rem', color: 'var(--color-muted)' }}>
+              🔒 <em>Direct on-chain state modification with real-time eligibility updates.</em>
+            </span>
+          </div>
         </div>
 
         <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>

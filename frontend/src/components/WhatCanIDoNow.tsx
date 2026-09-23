@@ -8,6 +8,7 @@ import {
   useVouchersByBeneficiary
 } from '../hooks/useVouchera';
 import Tooltip from './Tooltip';
+import WelcomeRequestCard from './WelcomeRequestCard';
 
 export default function WhatCanIDoNow() {
   const { address, isConnected } = useAccount();
@@ -337,6 +338,9 @@ export default function WhatCanIDoNow() {
           <div className="progress-fill" style={{ width: `${progressPercent}%` }}></div>
         </div>
       </div>
+
+      {/* Free Welcome Activity Points Card */}
+      <WelcomeRequestCard />
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1rem', marginBottom: '1.25rem' }}>
         <div style={{ padding: '0.75rem', background: 'rgba(255, 255, 255, 0.04)', borderRadius: '0.5rem' }}>
