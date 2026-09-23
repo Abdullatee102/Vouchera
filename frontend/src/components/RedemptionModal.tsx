@@ -6,6 +6,7 @@ import type { Voucher } from '../types';
 import { useOrgMerchants, useProgram, useOrganization } from '../hooks/useVouchera';
 import { formatAddress, formatBOT } from '../utils/formatting';
 import { getCategoryByCode } from '../utils/categories';
+import TransactionStatus from './TransactionStatus';
 import { useQueryClient } from '@tanstack/react-query';
 
 interface RedemptionModalProps {
@@ -201,6 +202,7 @@ export default function RedemptionModal({ voucher, onClose, onSuccess: onParentS
             />
 
             {/* Audit & Settlement Notice */}
+            {/* Cryptographic Settlement Notice */}
             <div style={{ background: 'rgba(34, 197, 94, 0.08)', border: '1px solid rgba(34, 197, 94, 0.2)', borderRadius: '0.45rem', padding: '0.65rem 0.85rem', marginBottom: '1.25rem', fontSize: '0.785rem', color: 'var(--color-muted)' }}>
               🔒 <strong>Cryptographic Settlement:</strong> The contract will verify your voucher balance, merchant category, and transfer real BOT directly to the merchant.
             </div>
@@ -214,6 +216,13 @@ export default function RedemptionModal({ voucher, onClose, onSuccess: onParentS
                 </p>
               </div>
             )}
+            <TransactionStatus
+              hash={hash}
+              isPending={isPending}
+              error={error}
+              successMessage="✓ Voucher redemption confirmed & BOT settled to merchant!"
+              onSuccess={handleDone}
+            />
 
             {error && (
               <div style={{ padding: '0.75rem', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid var(--color-danger)', borderRadius: '0.45rem', color: 'var(--color-danger)', marginBottom: '1rem', fontSize: '0.85rem' }}>

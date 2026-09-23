@@ -17,6 +17,7 @@ import { CATEGORIES, getCategoryByCode } from '../utils/categories';
 import ProgramCard from '../components/ProgramCard';
 import MerchantCard from '../components/MerchantCard';
 import OrgSetupProgress from '../components/OrgSetupProgress';
+import TransactionStatus from '../components/TransactionStatus';
 import { useQueryClient } from '@tanstack/react-query';
 import type { Redemption, VoucherProgram } from '../types';
 
@@ -255,6 +256,13 @@ export default function OrganizationDetail() {
           )}
         </div>
       )}
+      <TransactionStatus
+        hash={hash}
+        isPending={isPending}
+        error={error}
+        successMessage="✓ Transaction confirmed and state updated on Bohr Testnet!"
+        onSuccess={handleRefresh}
+      />
 
       {/* TAB 1: PROGRAMS */}
       {activeTab === 'programs' && (

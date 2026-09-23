@@ -5,6 +5,7 @@ import { VOUCHERA_ABI, VOUCHERA_CONTRACT_ADDRESS } from '../config/contracts';
 import { useAllOrganizations, useOrganizationsByOwner, useActivityScore, useOrganizationThreshold } from '../hooks/useVouchera';
 import OrgCard from '../components/OrgCard';
 import Tooltip from '../components/Tooltip';
+import TransactionStatus from '../components/TransactionStatus';
 import { useQueryClient } from '@tanstack/react-query';
 
 export default function Organizations() {
@@ -154,20 +155,16 @@ export default function Organizations() {
                 disabled={isPending || isConfirming}
               />
 
-              {(isPending || isConfirming) && (
-                <div style={{ textAlign: 'center', padding: '1rem', background: 'rgba(6, 182, 212, 0.1)', borderRadius: '0.45rem', marginBottom: '1rem' }}>
-                  <div className="spinner" style={{ marginBottom: '0.5rem' }}></div>
-                  <p style={{ margin: 0, fontSize: '0.85rem' }}>
-                    {isPending ? 'Confirm transaction in your wallet...' : 'Registering organization on Bohr Testnet...'}
-                  </p>
-                </div>
-              )}
-
-              {error && (
-                <div style={{ padding: '0.75rem', background: 'rgba(239, 68, 68, 0.15)', border: '1px solid var(--color-danger)', borderRadius: '0.45rem', color: 'var(--color-danger)', marginBottom: '1rem', fontSize: '0.85rem' }}>
-                  Error: {error.message.slice(0, 120)}...
-                </div>
-              )}
+              <TransactionStatus
+                hash={hash}
+                isPending={isPending}
+                error={error}
+                successMessage="✓ Organization created and registered on Bohr Testnet!"
+                onSuccess={() => {
+                  queryClient.invalidateQueries();
+                  refetchMyOrgs();
+                }}
+              />
 
               <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
                 <button type="submit" className="btn btn-primary" disabled={isPending || isConfirming || !name.trim() || !description.trim()}>

@@ -55,7 +55,7 @@ function UserActivityPreview({
       {added > 0n && (
         <div style={{ padding: '0.5rem', background: 'rgba(6, 182, 212, 0.08)', borderRadius: '0.35rem', border: '1px solid rgba(6, 182, 212, 0.2)', marginTop: '0.5rem' }}>
           <span style={{ color: 'var(--color-text)', fontSize: '0.8rem' }}>
-            ⚡ Preview after +{added.toString()} pts: <strong>{expectedScore.toString()} / {currentThreshold.toString()} pts</strong> ({willBeEligible ? '🎉 Will Become Eligible' : 'Still Needs Points'})
+            ⚡ Preview after +${added.toString()} pts: <strong>${expectedScore.toString()} / ${currentThreshold.toString()} pts</strong> ({willBeEligible ? '🎉 Will Become Eligible' : 'Still Needs Points'})
           </span>
         </div>
       )}
@@ -200,7 +200,7 @@ export default function AdminDashboard() {
             </div>
           )}
 
-          <form onSubmit={handleRecordActivity}>
+          <div>
             <label className="label">Participant Wallet Address *</label>
             <input 
               type="text" 
@@ -218,42 +218,80 @@ export default function AdminDashboard() {
               additionalAmount={activityAmount}
             />
 
-            <label className="label">Points to Award (Integer) *</label>
-            <input 
-              type="number" 
-              className="input" 
-              value={activityAmount} 
-              onChange={e => setActivityAmount(e.target.value)} 
-              min="1"
-              placeholder="e.g. 5"
-              required 
-            />
-
+            {/* Quick Action: 2 Welcome Points */}
             {validAddress && (
-              <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: '0.75rem' }}>
-                Confirmation: You are awarding <strong>{activityAmount || 0} activity points</strong> to <code>{formatAddress(validAddress)}</code>.
-              </p>
+              <div style={{ padding: '0.85rem', background: 'rgba(124, 58, 237, 0.08)', border: '1px solid rgba(124, 58, 237, 0.25)', borderRadius: '0.5rem', marginBottom: '1.25rem' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                  <strong style={{ color: '#c084fc', fontSize: '0.9rem' }}>🎁 Award 2 Welcome Points</strong>
+                  <span className="badge badge-primary">+2 Points</span>
+                </div>
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', margin: '0 0 0.75rem 0', lineHeight: '1.4' }}>
+                  Grant 2 initial activity points to new participants on-chain via <code>recordActivity(user, 2)</code>.
+                </p>
+
+                {/* Prevention Notice */}
+                <div style={{ padding: '0.5rem', background: 'rgba(245, 158, 11, 0.08)', border: '1px solid rgba(245, 158, 11, 0.2)', borderRadius: '0.35rem', marginBottom: '0.75rem', fontSize: '0.75rem', color: 'var(--color-warning)', lineHeight: '1.3' }}>
+                  ⚠️ <em>Welcome points are administered manually on-chain. Confirm this wallet has not already received its welcome reward before awarding again.</em>
+                </div>
+
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  style={{ width: '100%', background: 'linear-gradient(135deg, #06b6d4, #7c3aed)', border: 'none', color: '#fff', fontSize: '0.85rem' }}
+                  disabled={pendingAct || !validAddress}
+                  onClick={() => {
+                    writeActivity({
+                      address: VOUCHERA_CONTRACT_ADDRESS,
+                      abi: VOUCHERA_ABI,
+                      functionName: 'recordActivity',
+                      args: [validAddress, 2n],
+                    });
+                  }}
+                >
+                  {pendingAct ? 'Submitting to Bohr...' : '🎁 Confirm & Award 2 Welcome Points'}
+                </button>
+              </div>
             )}
 
-            <button
-              type="submit"
-              className="btn btn-primary"
-              style={{ width: '100%' }}
-              disabled={pendingAct || !validAddress || !activityAmount || parseInt(activityAmount) <= 0}
-            >
-              {pendingAct ? 'Submitting to Bohr...' : `Award ${activityAmount || 0} Points on-Chain`}
-            </button>
+            <form onSubmit={handleRecordActivity} style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1rem' }}>
+              <label className="label">Custom Points Adjustment (Integer) *</label>
+              <input 
+                type="number" 
+                className="input" 
+                value={activityAmount} 
+                onChange={e => setActivityAmount(e.target.value)} 
+                min="1"
+                placeholder="e.g. 5"
+                required 
+              />
+
+              {validAddress && (
+                <p style={{ fontSize: '0.8rem', color: 'var(--color-muted)', marginBottom: '0.75rem' }}>
+                  Custom Adjustment: You are awarding <strong>{activityAmount || 0} activity points</strong> to <code>{formatAddress(validAddress)}</code>.
+                </p>
+              )}
+
+              <button
+                type="submit"
+                className="btn btn-secondary"
+                style={{ width: '100%' }}
+                disabled={pendingAct || !validAddress || !activityAmount || parseInt(activityAmount) <= 0}
+              >
+                {pendingAct ? 'Submitting to Bohr...' : `Award Custom ${activityAmount || 0} Points`}
+              </button>
+            </form>
 
             <TransactionStatus
               hash={hashAct}
               isPending={pendingAct}
               error={errAct}
+              successMessage="✓ Activity score updated successfully on Bohr Testnet!"
               onSuccess={() => {
                 setActivityAmount('2');
                 handleRefresh();
               }}
             />
-          </form>
+          </div>
         </div>
       </div>
 
