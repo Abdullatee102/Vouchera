@@ -5,7 +5,7 @@ import { useProtocolAdmin, useOrganizationThreshold, useAllOrganizations, useAct
 import TransactionStatus from '../components/TransactionStatus';
 import { useQueryClient } from '@tanstack/react-query';
 import { formatAddress } from '../utils/formatting';
-import { getPendingWelcomeRequests, markWelcomeRequestApproved, subscribeWelcomeRequests, type WelcomeRequest } from '../utils/welcomeRequests';
+import { getPendingWelcomeRequests, markWelcomeRequestApproved, subscribeWelcomeRequests, isWelcomeClaimed, type WelcomeRequest } from '../utils/welcomeRequests';
 
 function UserActivityPreview({
   targetAddress,
@@ -31,13 +31,14 @@ function UserActivityPreview({
   const expectedScore = currentScore + added;
   const willBeEligible = expectedScore >= currentThreshold && currentThreshold > 0n;
   const pointsRemaining = currentThreshold > currentScore ? currentThreshold - currentScore : 0n;
+  const alreadyClaimed = isWelcome && isWelcomeClaimed(targetAddress, score);
 
   return (
     <div style={{ padding: '0.85rem', background: 'rgba(255, 255, 255, 0.04)', borderRadius: '0.5rem', border: '1px solid var(--color-border)', margin: '1rem 0', fontSize: '0.85rem' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
         <strong style={{ color: 'var(--color-primary)' }}>Target Wallet Real-Time State</strong>
-        <span className={`badge ${isEligible ? 'badge-success' : 'badge-warning'}`}>
-          {isLoading ? 'Checking...' : isEligible ? '✓ Currently Eligible' : '⏳ Below Threshold'}
+        <span className={`badge ${alreadyClaimed ? 'badge-success' : isEligible ? 'badge-success' : 'badge-warning'}`}>
+          {isLoading ? 'Checking...' : alreadyClaimed ? '✓ Welcome Claimed' : isEligible ? '✓ Currently Eligible' : '⏳ Below Threshold'}
         </span>
       </div>
 
@@ -56,15 +57,15 @@ function UserActivityPreview({
         </div>
         {isWelcome && (
           <div>
-            <span style={{ color: 'var(--color-muted)', fontSize: '0.785rem' }}>Welcome Reward:</span>
-            <p style={{ margin: '0.1rem 0 0 0', color: '#c084fc', fontWeight: 'bold' }}>
-              +2 Points (Fixed)
+            <span style={{ color: 'var(--color-muted)', fontSize: '0.785rem' }}>Welcome Status:</span>
+            <p style={{ margin: '0.1rem 0 0 0', color: alreadyClaimed ? 'var(--color-success)' : '#c084fc', fontWeight: 'bold' }}>
+              {alreadyClaimed ? 'Claimed (1x Max)' : '+2 Points (Unclaimed)'}
             </p>
           </div>
         )}
       </div>
 
-      {added > 0n && (
+      {added > 0n && !alreadyClaimed && (
         <div style={{ padding: '0.5rem', background: isWelcome ? 'rgba(124, 58, 237, 0.1)' : 'rgba(6, 182, 212, 0.08)', borderRadius: '0.35rem', border: `1px solid ${isWelcome ? 'rgba(124, 58, 237, 0.25)' : 'rgba(6, 182, 212, 0.2)'}`, marginTop: '0.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.35rem', fontSize: '0.8rem' }}>
             <span>
@@ -96,6 +97,17 @@ export default function AdminDashboard() {
   const [generalUser, setGeneralUser] = useState('');
   const [generalAmount, setGeneralAmount] = useState('5');
 
+  const validWelcomeAddress = welcomeUser.startsWith('0x') && welcomeUser.length === 42
+    ? (welcomeUser as `0x${string}`)
+    : undefined;
+
+  const validGeneralAddress = generalUser.startsWith('0x') && generalUser.length === 42
+    ? (generalUser as `0x${string}`)
+    : undefined;
+
+  const { data: welcomeScore, refetch: refetchWelcomeScore } = useActivityScore(validWelcomeAddress);
+  const isWelcomeAlreadyClaimed = isWelcomeClaimed(validWelcomeAddress, welcomeScore);
+
   // Contract Writes
   const { writeContract: writeThreshold, data: hashThresh, isPending: pendingThresh, error: errThresh } = useWriteContract();
   const { writeContract: writeWelcome, data: hashWelcome, isPending: pendingWelcome, error: errWelcome } = useWriteContract();
@@ -109,14 +121,6 @@ export default function AdminDashboard() {
     update();
     return subscribeWelcomeRequests(update);
   }, []);
-
-  const validWelcomeAddress = welcomeUser.startsWith('0x') && welcomeUser.length === 42
-    ? (welcomeUser as `0x${string}`)
-    : undefined;
-
-  const validGeneralAddress = generalUser.startsWith('0x') && generalUser.length === 42
-    ? (generalUser as `0x${string}`)
-    : undefined;
 
   if (!isAdmin) {
     return (
@@ -139,7 +143,7 @@ export default function AdminDashboard() {
   };
 
   const handleApproveWelcome = (targetAddr: `0x${string}`) => {
-    if (!targetAddr) return;
+    if (!targetAddr || isWelcomeAlreadyClaimed) return;
     writeWelcome({
       address: VOUCHERA_CONTRACT_ADDRESS,
       abi: VOUCHERA_ABI,
@@ -163,6 +167,9 @@ export default function AdminDashboard() {
     queryClient.invalidateQueries();
     refetchThreshold();
     refetchOrgs();
+    if (validWelcomeAddress) {
+      refetchWelcomeScore();
+    }
   };
 
   return (
@@ -172,7 +179,7 @@ export default function AdminDashboard() {
         <div>
           <h1 className="section-title" style={{ margin: '0 0 0.25rem 0' }}>Protocol Admin Dashboard</h1>
           <p style={{ margin: 0, color: 'var(--color-muted)', fontSize: '0.9rem' }}>
-            Protocol Governance: Manage creation thresholds, approve welcome rewards (+2 pts), and award custom activity points.
+            Protocol Governance: Manage creation thresholds, approve one-time welcome rewards (+2 pts), and award custom activity points.
           </p>
         </div>
         <button className="btn btn-secondary" onClick={handleRefresh} style={{ fontSize: '0.85rem' }}>
@@ -223,17 +230,17 @@ export default function AdminDashboard() {
       {/* Two Core Action Areas: A. Welcome Requests vs B. General Activity Award */}
       <div className="grid md:grid-cols-2" style={{ gap: '1.5rem', marginBottom: '2rem' }}>
         
-        {/* SECTION A: Welcome Activity Requests (Fixed 2 Points) */}
+        {/* SECTION A: Welcome Activity Requests (Fixed 2 Points, One-Time Max) */}
         <div className="card" style={{ borderLeft: '4px solid #c084fc' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <span style={{ fontSize: '1.25rem' }}>🎁</span>
               <h2 style={{ margin: 0, fontSize: '1.15rem', color: '#c084fc' }}>Welcome Activity Requests</h2>
             </div>
-            <span className="badge badge-primary">+2 Points Fixed</span>
+            <span className="badge badge-primary">One-Time (+2 pts)</span>
           </div>
           <p style={{ color: 'var(--color-muted)', fontSize: '0.85rem', marginBottom: '1rem' }}>
-            Review new participant requests and award the fixed <strong>2 Welcome Points</strong> starter reward via on-chain <code>recordActivity(user, 2)</code>.
+            Review new participant requests and award the fixed <strong>2 Welcome Points</strong> starter reward once via <code>recordActivity(user, 2)</code>.
           </p>
 
           {/* Active Queue from Session */}
@@ -283,20 +290,39 @@ export default function AdminDashboard() {
 
             {validWelcomeAddress && (
               <div style={{ marginTop: '1rem' }}>
-                {/* Duplicate Prevention Notice */}
-                <div style={{ padding: '0.5rem 0.75rem', background: 'rgba(245, 158, 11, 0.08)', border: '1px solid rgba(245, 158, 11, 0.25)', borderRadius: '0.4rem', marginBottom: '0.85rem', fontSize: '0.785rem', color: 'var(--color-warning)', lineHeight: '1.35' }}>
-                  ⚠️ <strong>On-Chain Confirmation Notice:</strong> Welcome points are administered manually on Bohr Testnet. Verify this wallet is a genuine new participant and has not already received its welcome allocation.
-                </div>
+                {isWelcomeAlreadyClaimed ? (
+                  <div>
+                    <div style={{ padding: '0.65rem 0.85rem', background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '0.4rem', marginBottom: '0.85rem', fontSize: '0.8rem', color: 'var(--color-danger)', lineHeight: '1.4' }}>
+                      ⛔ <strong>One-Time Limit Reached:</strong> This wallet already has <strong>{welcomeScore?.toString() || 0} activity points</strong> on-chain. Welcome reward cannot be awarded more than once. Use the General Activity Award section on the right for additional points.
+                    </div>
 
-                <button
-                  type="button"
-                  className="btn btn-primary"
-                  style={{ width: '100%', background: 'linear-gradient(135deg, #06b6d4, #7c3aed)', border: 'none', color: '#fff', padding: '0.65rem', fontWeight: 600 }}
-                  disabled={pendingWelcome || !validWelcomeAddress}
-                  onClick={() => handleApproveWelcome(validWelcomeAddress)}
-                >
-                  {pendingWelcome ? 'Submitting +2 Points to Bohr...' : `🎁 Approve +2 Welcome Points for ${formatAddress(validWelcomeAddress)}`}
-                </button>
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      style={{ width: '100%', opacity: 0.6, cursor: 'not-allowed', fontSize: '0.85rem' }}
+                      disabled={true}
+                    >
+                      🚫 Welcome Reward Already Claimed (1x Limit)
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    {/* Duplicate Prevention Notice */}
+                    <div style={{ padding: '0.5rem 0.75rem', background: 'rgba(245, 158, 11, 0.08)', border: '1px solid rgba(245, 158, 11, 0.25)', borderRadius: '0.4rem', marginBottom: '0.85rem', fontSize: '0.785rem', color: 'var(--color-warning)', lineHeight: '1.35' }}>
+                      ⚠️ <strong>One-Time Allocation:</strong> Confirm this wallet is a first-time participant. Approving grants exactly 2 activity points on Bohr Testnet.
+                    </div>
+
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      style={{ width: '100%', background: 'linear-gradient(135deg, #06b6d4, #7c3aed)', border: 'none', color: '#fff', padding: '0.65rem', fontWeight: 600 }}
+                      disabled={pendingWelcome || !validWelcomeAddress}
+                      onClick={() => handleApproveWelcome(validWelcomeAddress)}
+                    >
+                      {pendingWelcome ? 'Submitting +2 Points to Bohr...' : `🎁 Approve +2 Welcome Points for ${formatAddress(validWelcomeAddress)}`}
+                    </button>
+                  </div>
+                )}
               </div>
             )}
 
